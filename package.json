@@ -1,24 +1,47 @@
 {
   "name": "voltyjs",
-  "version": "1.0.4",
+  "version": "1.0.22",
   "description": "so cool ..",
-  "homepage": "https://github.com/AkshayDhola/voltyjs#readme",
-  "bugs": {
-    "url": "https://github.com/AkshayDhola/voltyjs/issues"
+  "main": "src/Volty.js",
+  "scripts": {
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AkshayDhola/voltyjs.git"
   },
-  "license": "MIT",
-  "author": "",
-  "type": "module",
-  "main": "dist/volty.js",
-  "files": [
-    "dist"
+  "author": "@AkshayDhola",
+  "keywords": [
+    "javascript",
+    "volty",
+    "voltyjs",
+    "gsap",
+    "library",
+    "web"
   ],
-  "scripts": {
-    "build": "webpack",
-    "prepublishOnly": "npm run build"
+  "license": "MIT",
+  "dependencies": {
+    "gsap": "^3.12.2",
+    "react": "19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "homepage": "https://github.com/AkshayDhola/voltyjs#readme",
+  "bugs": {
+    "url": "https://github.com/AkshayDhola/voltyjs/issues"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "style": "src/Volty.css",
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   }
 }
