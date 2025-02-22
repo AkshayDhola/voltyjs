@@ -1,0 +1,10 @@
+.cuberto{
+    position: absolute;
+    z-index: 99999;
+    will-change: transform;
+    top: -10%;
+    left: -10%;
+    pointer-events: none;
+    border: 1px solid rgba(0, 0,0,0.5);
+    mix-blend-mode: difference;
+}
