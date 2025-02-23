@@ -1,7 +1,7 @@
 {
   "name": "voltyjs",
-  "version": "1.0.26",
-  "description": "so cool ..",
+  "version": "1.0.27",
+  "description": "so cool ...",
   "main": "src/Volty.js",
   "scripts": {
     "build": "webpack --mode production"
@@ -14,7 +14,6 @@
   "keywords": [
     "javascript",
     "volty",
-    "voltyjs",
     "gsap",
     "library",
     "web"
