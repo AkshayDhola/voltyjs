@@ -1,35 +1,24 @@
 .cuberto{
-    position: absolute;
-    z-index: 99999;
-    will-change: transform;
-    top: -10%;
-    left: -10%;
-    pointer-events: none;
-    mix-blend-mode: difference;
-    border-radius: 50%;
-    transform-origin: center;
+  position: absolute;
+  z-index: 99999;
+  will-change: transform;
+  top: -10%;
+  left: -10%;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: center;  
+  border-radius: 50%;
 }
 
 .radial{
-    opacity: .5;
-    filter: blur(5rem);
-    border-radius: 100rem;
-    inset: 0% auto auto 0%;
-    transform: rotate(-30deg);
-    will-change: transform;
-    transform: translate3d(0px,29.0352rem,0px) scale3d(1,1,1) rotateX(0deg) rotateY(0deg) rotateZ(-33.4157deg) skew(0deg,0deg);
-    transform-style: preserve-3d;
-}
-
-.cuberto_img{
-    object-fit: cover;
+  opacity: .5;
+  filter: blur(5rem);
+  border-radius: 100rem;
+  inset: 0% auto auto 0%;
 }
 
 .cuberto_text{
-    width: fit-content;
-    height: fit-content;
-    padding: .6rem 1.4rem;
-    border: 1px solid rgba(0, 0, 0, 0.6);
-    border-radius: 5px;
+  position: absolute;
+  top: -10%;
+  left: -10%;
 }
-
