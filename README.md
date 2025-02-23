@@ -1,5 +1,7 @@
 # Volty.js - Where Every Animation Sparks
 
+![Volty.js](media/voltyjs.jpg)
+
 Volty is an innovative React animation library designed to enhance user interfaces with smooth and visually appealing animations.
 
 ## Table of contents
