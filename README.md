@@ -127,9 +127,9 @@ export default App;
 <div style="display:flex;">
 <img alt="trail" src="https://i.pinimg.com/474x/22/28/03/22280349e233c5c0773b895c997c2c04.jpg" style="width: 150px; height: 300px;">
 <img alt="trail" src="https://i.pinimg.com/474x/44/92/b4/4492b4ba8a0e9539d073fc4bf5da8935.jpg" style="width: 150px; height: 300px;">
-<img alt="trail" src=" https://i.pinimg.com/474x/87/df/b9/87dfb9718758e67702d9431bc3dec264.jpg" style="width: 150px; height: 300px;">
+<img alt="trail" src="https://i.pinimg.com/474x/87/df/b9/87dfb9718758e67702d9431bc3dec264.jpg" style="width: 150px; height: 300px;">
 <img alt="trail" src="https://i.pinimg.com/736x/32/ae/37/32ae372a87ef780a789a754450ced028.jpg" style="width: 150px; height: 300px;">
-<img alt="trail" src=" https://i.pinimg.com/736x/8a/2c/f9/8a2cf9dc06db2522e3da27295bcf155c.jpg" style="width: 150px; height: 300px;">
+<img alt="trail" src="https://i.pinimg.com/736x/8a/2c/f9/8a2cf9dc06db2522e3da27295bcf155c.jpg" style="width: 150px; height: 300px;">
 </div>
 
 
