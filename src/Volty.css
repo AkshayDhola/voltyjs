@@ -11,14 +11,21 @@
 }
 
 .radial{
-  opacity: .5;
-  filter: blur(5rem);
-  border-radius: 100rem;
-  inset: 0% auto auto 0%;
+  opacity: .7;
+  filter: blur(25px);
+  border-radius: 50%;
 }
 
 .cuberto_text{
   position: absolute;
   top: -10%;
   left: -10%;
+}
+
+.images{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
 }
