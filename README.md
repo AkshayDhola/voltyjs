@@ -81,6 +81,49 @@ export default App;
 1. For `radial` use size more then 60 for better experience.
 2. In `text` property give text you want to print.
 
+### Text Effect
+
+The feature creates smooth text effect, creating an engaging user experience.
+
+```javascript
+import React from 'react';
+import { TextBentoo } from 'voltyjs';
+
+function App() {
+  return (
+    <div className="w-full h-screen">
+         <TextBentoo color={"#B9B28A"} text={"sitaram"} min={50} max={300} bottom={20} left={20} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+1. `bottom` and `left` is used to set position.
+2. `min` and `max` is used to set max amd min size of text size;
+
+### Image Trail Effect
+
+The feature creates smooth image trail effect with mouse-move, creating an engaging user experience.
+
+```javascript
+import React from 'react';
+import { ImageTrail } from 'voltyjs';
+
+function App() {
+  return (
+    <div className="w-full h-screen">
+         <ImageTrail width={180} height={300} rounded={7}/>
+    </div>
+  );
+}
+
+export default App;
+```
+
+1. For `images` pass the array of images which you want to trail.
+
 
 # License
 
