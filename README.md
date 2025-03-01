@@ -123,7 +123,7 @@ export default App;
 ```
 
 1. For `images` pass the array of images which you want to trail.
-
+2. This defualt images is set in images props.
 
 # License
 
