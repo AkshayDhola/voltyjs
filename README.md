@@ -151,7 +151,7 @@ export default App;
 1. For `images` pass the array of images which you want to trail.
 
 
-![images](media/three-d.png)
+![images](media/three.png)
 
 
 # License
