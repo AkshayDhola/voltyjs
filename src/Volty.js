@@ -131,7 +131,7 @@ export const Trail = ({images =[ "https://i.pinimg.com/474x/22/28/03/22280349e23
   );
 };
 
-export const ThreeSlider =({images =[ "https://i.pinimg.com/474x/22/28/03/22280349e233c5c0773b895c997c2c04.jpg","https://i.pinimg.com/474x/44/92/b4/4492b4ba8a0e9539d073fc4bf5da8935.jpg"," https://i.pinimg.com/474x/87/df/b9/87dfb9718758e67702d9431bc3dec264.jpg","https://i.pinimg.com/736x/32/ae/37/32ae372a87ef780a789a754450ced028.jpg"," https://i.pinimg.com/736x/8a/2c/f9/8a2cf9dc06db2522e3da27295bcf155c.jpg"],size=400}) => {
+export const ThreeSlider =({images =[ "https://i.pinimg.com/474x/22/28/03/22280349e233c5c0773b895c997c2c04.jpg","https://i.pinimg.com/474x/44/92/b4/4492b4ba8a0e9539d073fc4bf5da8935.jpg"," https://i.pinimg.com/474x/87/df/b9/87dfb9718758e67702d9431bc3dec264.jpg","https://i.pinimg.com/736x/32/ae/37/32ae372a87ef780a789a754450ced028.jpg"," https://i.pinimg.com/736x/8a/2c/f9/8a2cf9dc06db2522e3da27295bcf155c.jpg"],size=200}) => {
   const [card, setCard] = useState([]);
   const sliderRef = useRef(null);
   const scroll =()=>{
@@ -164,7 +164,7 @@ export const ThreeSlider =({images =[ "https://i.pinimg.com/474x/22/28/03/222803
   return (
     <div className="threeslider" ref={sliderRef}>
       {card.map((img) => (
-        <div key={img.i} className="card" style={{width:size,height:size}} onMouseOver={MouseOver} onMouseOut={MouseOut}>
+        <div key={img.i} className="card" style={{width:size,height:size,margin: `-${size-100}px 0`}} onMouseOver={MouseOver} onMouseOut={MouseOut}>
           <img src={img.src}/>
         </div>   
       ))}
