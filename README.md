@@ -129,6 +129,31 @@ export default App;
 ![images](media/image_trail.png)
 
 
+### 3D Slider
+
+The feature creates smooth 3D slider, creating an engaging user experience.
+
+```javascript
+import React from 'react';
+import { ThreeSlider } from 'voltyjs';
+
+function App() {
+  return (
+    <div className="w-full h-[400vh] overflow-hidden">  {/* give proper height, how much you want to scoll? */}
+         <ThreeSlider size={400}/>
+    </div>
+  );
+}
+
+export default App;
+```
+
+1. For `images` pass the array of images which you want to trail.
+
+
+![images](media/three-d.png)
+
+
 # License
 
 Voltyjs is released under the [MIT License](license.md). Feel free to use it in both personal and commercial projects.
