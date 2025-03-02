@@ -42,11 +42,9 @@
 
 .card{
   position: relative;
-
   transform: rotateX(20deg) rotateY(-10deg) rotateZ(130deg);
   border: 1px solid rgba(255,255,255,0.25);
   border-radius: 11px;
   overflow: hidden;
-  margin: -300px 0;
   transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
