@@ -171,3 +171,103 @@ export const ThreeSlider =({images =[ "https://i.pinimg.com/474x/22/28/03/222803
     </div>
   );
 };
+
+export const Infinite = ({ children, smoothFactor = 0.05 }) => {
+  const containerRef = useRef(null);
+  const scrollerRef = useRef(null);
+  const [sectionWidth, setSectionWidth] = useState(0);
+
+  const BUFFER_SECTIONS = 2;
+  let targetScroll = 0;
+  let currentScroll = 0;
+  let isAnimating = false;
+
+  const interpolate = (start, end, factor) => start + (end - start) * factor;
+
+  const setupScrolling = () => {
+    const scroller = scrollerRef.current;
+    const sections = Array.from(scroller.children);
+    scroller.querySelectorAll(".clone").forEach((clone) => clone.remove());
+
+    let calculatedWidth = window.innerWidth;
+    setSectionWidth(calculatedWidth);
+
+    for (let i = -BUFFER_SECTIONS; i < BUFFER_SECTIONS; i++) {
+      sections.forEach((section) => {
+        const clone = section.cloneNode(true);
+        clone.classList.add("clone");
+        scroller.appendChild(clone);
+      });
+    }
+
+    scroller.style.width = `${calculatedWidth * (sections.length + BUFFER_SECTIONS * 2)}px`;
+    targetScroll = calculatedWidth * sections.length;
+    currentScroll = targetScroll;
+    scroller.style.transform = `translateX(-${currentScroll}px)`;
+
+    return calculatedWidth;
+  };
+
+  const checkBoundary = (calculatedWidth) => {
+    const scroller = scrollerRef.current;
+    if (currentScroll > calculatedWidth * (BUFFER_SECTIONS + 1)) {
+      targetScroll -= calculatedWidth * BUFFER_SECTIONS;
+      currentScroll -= calculatedWidth * BUFFER_SECTIONS;
+      scroller.style.transform = `translateX(-${currentScroll}px)`;
+      return true;
+    }
+    if (currentScroll < calculatedWidth * BUFFER_SECTIONS) {
+      targetScroll += calculatedWidth * BUFFER_SECTIONS;
+      currentScroll += calculatedWidth * BUFFER_SECTIONS;
+      scroller.style.transform = `translateX(-${currentScroll}px)`;
+      return true;
+    }
+    return false;
+  };
+
+  const animateScroll = (calculatedWidth) => {
+    const scroller = scrollerRef.current;
+    currentScroll = interpolate(currentScroll, targetScroll, smoothFactor);
+    scroller.style.transform = `translateX(-${currentScroll}px)`;
+
+    if (Math.abs(targetScroll - currentScroll) < 0.1) {
+      isAnimating = false;
+    } else {
+      requestAnimationFrame(() => animateScroll(calculatedWidth));
+    }
+  };
+
+  const handleWheelScroll = (e) => {
+    e.preventDefault();
+    targetScroll += e.deltaY * 0.5;
+    checkBoundary(sectionWidth);
+
+    if (!isAnimating) {
+      isAnimating = true;
+      requestAnimationFrame(() => animateScroll(sectionWidth));
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (container) {
+      const calculatedWidth = setupScrolling();
+      container.addEventListener("wheel", handleWheelScroll, { passive: false });
+
+      return () => {
+        container.removeEventListener("wheel", handleWheelScroll);
+      };
+    }
+  }, []);
+
+  return (
+    <div className="scroll-container" ref={containerRef}>
+      <div className="scroll-wrapper" ref={scrollerRef}>
+        {React.Children.map(children, (child) =>
+          React.cloneElement(child, { className: "scroll-section" })
+        )}
+      </div>
+    </div>
+  );
+};
