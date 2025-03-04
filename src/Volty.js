@@ -172,7 +172,7 @@ export const ThreeSlider =({images =[ "https://i.pinimg.com/474x/22/28/03/222803
   );
 };
 
-export const Infinite = ({ children, smoothFactor = 0.05 }) => {
+export const Infinite = ({ children, smoothFactor = 0.08, background = "transparent" }) => {
   const containerRef = useRef(null);
   const scrollerRef = useRef(null);
   const [sectionWidth, setSectionWidth] = useState(0);
@@ -262,10 +262,10 @@ export const Infinite = ({ children, smoothFactor = 0.05 }) => {
   }, []);
 
   return (
-    <div className="scroll-container" ref={containerRef}>
-      <div className="scroll-wrapper" ref={scrollerRef}>
+    <div className="scroll-container" style={{background:background}} ref={containerRef}>
+      <div className="scroll-wrapper" style={{background:background}} ref={scrollerRef}>
         {React.Children.map(children, (child) =>
-          React.cloneElement(child, { className: "scroll-section" })
+          React.cloneElement(child, { style: { flex :"0 0 100vw"} })
         )}
       </div>
     </div>
