@@ -10,7 +10,11 @@ Volty is an innovative React animation library designed to enhance user interfac
 3. [Getting Started](#getting-started)
    - Required Libraries
 4. [Cool Effects](#cool-effects)
-   - Cuberto
+   - Cuberto Effect
+   - Text Effect
+   - Image Trail Effect
+   - 3D Slider Effect
+   - Infinite Scrolling Effect
 
 ## Introduction
 
@@ -109,12 +113,12 @@ The feature creates smooth image trail effect with mouse-move, creating an engag
 
 ```javascript
 import React from 'react';
-import { ImageTrail } from 'voltyjs';
+import { Trail } from 'voltyjs';
 
 function App() {
   return (
     <div className="w-full h-screen">
-         <ImageTrail width={180} height={300} rounded={7}/>
+         <Trail width={180} height={300} rounded={7}/>
     </div>
   );
 }
@@ -153,6 +157,30 @@ export default App;
 
 ![images](media/three.png)
 
+
+### Infinite Scrolling
+
+The feature creates smooth Infinite scrolling effect, creating an engaging user experience.
+
+```javascript
+import React from 'react';
+import { Infinite } from 'voltyjs';
+
+function App() {
+  return (
+    <Infinite smoothFactor={0.08}>
+        <div className="w-full h-full flex justify-center items-center overflow-hidden">
+            <h1 className="text-9xl">VoltyJS</h1>
+        </div>
+        <div className="w-[100vw] h-full flex justify-center items-center overflow-hidden">
+            
+        </div>
+    </Infinite>
+  );
+}
+
+export default App;
+```
 
 # License
 

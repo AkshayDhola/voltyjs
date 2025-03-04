@@ -48,6 +48,7 @@
   overflow: hidden;
   transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+
 .scroll-container {
   width: 100vw;
   overflow: hidden;
@@ -63,14 +64,6 @@
 
 .scroll-section {
   flex: 0 0 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: bold;
-  background: lightblue;
-  border-right: 1px solid #ddd;
 }
 
 .clone {

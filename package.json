@@ -1,6 +1,6 @@
 {
   "name": "voltyjs",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "description": "so cool ...",
   "main": "src/Volty.js",
   "scripts": {
