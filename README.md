@@ -169,13 +169,11 @@ import { Infinite } from 'voltyjs';
 function App() {
   return (
     <Infinite smoothFactor={0.08}>
-        <div className="w-full h-full flex justify-center items-center overflow-hidden">
-            <h1 className="text-9xl">VoltyJS</h1>
-        </div>
-        <div className="w-[100vw] h-full flex justify-center items-center overflow-hidden">
-            
-        </div>
-    </Infinite>
+      <div style={{width:"100vw",height:"100vh",background:"#A4B465"}}></div>
+      <div style={{width:"100vw",height:"100vh",background:"#E5D0AC"}}></div>
+      <div style={{width:"100vw",height:"100vh",background:"#FFDA78"}}></div>
+      <div style={{width:"100vw",height:"100vh",background:"#CDC1FF"}}></div>
+   </Infinite>
   );
 }
 
