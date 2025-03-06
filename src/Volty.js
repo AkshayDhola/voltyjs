@@ -172,7 +172,7 @@ export const ThreeSlider =({images =[ "https://i.pinimg.com/474x/22/28/03/222803
   );
 };
 
-export const Infinite = ({ children, smoothFactor = 0.08, background = "transparent",direction = "horizontal" }) => {
+export const Infinite = ({ children, smoothFactor = 0.08, background = "transparent" }) => {
   const containerRef = useRef(null);
   const scrollerRef = useRef(null);
   const [sectionWidth, setSectionWidth] = useState(0);
