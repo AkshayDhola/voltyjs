@@ -172,10 +172,10 @@ export const ThreeSlider =({images =[ "https://i.pinimg.com/474x/22/28/03/222803
   );
 };
 
-export const Infinite = ({ children, smoothFactor = 0.08, background = "transparent" }) => {
+export const Infinite = ({ children, smoothFactor = 0.08, background = "transparent",direction = "horizontal" }) => {
   const containerRef = useRef(null);
   const scrollerRef = useRef(null);
-  const [sectionWidth, setSectionWidth] = useState(0);
+  const [sectionSize, setSectionSize] = useState(0);
 
   const BUFFER_SECTIONS = 2;
   let targetScroll = 0;
@@ -189,8 +189,11 @@ export const Infinite = ({ children, smoothFactor = 0.08, background = "transpar
     const sections = Array.from(scroller.children);
     scroller.querySelectorAll(".clone").forEach((clone) => clone.remove());
 
-    let calculatedWidth = window.innerWidth;
-    setSectionWidth(calculatedWidth);
+ 
+ 
+    let calculatedSize =
+      direction === "horizontal" ? scroller.scrollWidth / sections.length : scroller.scrollHeight / sections.length;
+    setSectionSize(calculatedSize);
 
     for (let i = -BUFFER_SECTIONS; i < BUFFER_SECTIONS; i++) {
       sections.forEach((section) => {
@@ -200,51 +203,68 @@ export const Infinite = ({ children, smoothFactor = 0.08, background = "transpar
       });
     }
 
-    scroller.style.width = `${calculatedWidth * (sections.length + BUFFER_SECTIONS * 2)}px`;
-    targetScroll = calculatedWidth * sections.length;
+    if (direction === "horizontal") {
+      scroller.style.width = `${
+        calculatedSize * (sections.length + BUFFER_SECTIONS * 2)
+      }px`;
+    } else {
+      scroller.style.height = `${
+        calculatedSize * (sections.length + BUFFER_SECTIONS * 2)
+      }px`;
+    }
+    
+    targetScroll = calculatedSize * sections.length;
     currentScroll = targetScroll;
-    scroller.style.transform = `translateX(-${currentScroll}px)`;
+    scroller.style.transform = direction === "horizontal"
+      ? `translateX(-${currentScroll}px)`
+      : `translateY(-${currentScroll}px)`;
 
     return calculatedWidth;
   };
 
   const checkBoundary = (calculatedWidth) => {
     const scroller = scrollerRef.current;
-    if (currentScroll > calculatedWidth * (BUFFER_SECTIONS + 1)) {
-      targetScroll -= calculatedWidth * BUFFER_SECTIONS;
-      currentScroll -= calculatedWidth * BUFFER_SECTIONS;
-      scroller.style.transform = `translateX(-${currentScroll}px)`;
+    if (currentScroll > calculatedSize * (BUFFER_SECTIONS + 1)) {
+      targetScroll -= calculatedSize * BUFFER_SECTIONS;
+      currentScroll -= calculatedSize * BUFFER_SECTIONS;
+           scroller.style.transform = direction === "horizontal"
+        ? `translateX(-${currentScroll}px)`
+        : `translateY(-${currentScroll}px)`;
       return true;
     }
-    if (currentScroll < calculatedWidth * BUFFER_SECTIONS) {
-      targetScroll += calculatedWidth * BUFFER_SECTIONS;
-      currentScroll += calculatedWidth * BUFFER_SECTIONS;
-      scroller.style.transform = `translateX(-${currentScroll}px)`;
+    if (currentScroll < calculatedSize * BUFFER_SECTIONS) {
+      targetScroll += calculatedSize * BUFFER_SECTIONS;
+      currentScroll += calculatedSize * BUFFER_SECTIONS;
+      scroller.style.transform = direction === "horizontal"
+        ? `translateX(-${currentScroll}px)`
+        : `translateY(-${currentScroll}px)`;
       return true;
     }
     return false;
   };
 
-  const animateScroll = (calculatedWidth) => {
+  const animateScroll = (calculatedSize) => {
     const scroller = scrollerRef.current;
     currentScroll = interpolate(currentScroll, targetScroll, smoothFactor);
-    scroller.style.transform = `translateX(-${currentScroll}px)`;
-
+     scroller.style.transform = direction === "horizontal"
+      ? `translateX(-${currentScroll}px)`
+      : `translateY(-${currentScroll}px)`;
+    
     if (Math.abs(targetScroll - currentScroll) < 0.1) {
       isAnimating = false;
     } else {
-      requestAnimationFrame(() => animateScroll(calculatedWidth));
+      requestAnimationFrame(() => animateScroll(calculatedSize));
     }
   };
 
   const handleWheelScroll = (e) => {
     e.preventDefault();
     targetScroll += e.deltaY * 0.5;
-    checkBoundary(sectionWidth);
+    checkBoundary(calculatedSize);
 
     if (!isAnimating) {
       isAnimating = true;
-      requestAnimationFrame(() => animateScroll(sectionWidth));
+      requestAnimationFrame(() => animateScroll(sectionSize));
     }
   };
 
@@ -263,9 +283,17 @@ export const Infinite = ({ children, smoothFactor = 0.08, background = "transpar
 
   return (
     <div className="scroll-container" style={{background:background}} ref={containerRef}>
-      <div className="scroll-wrapper" style={{background:background}} ref={scrollerRef}>
+      <div className={`scroll-wrapper ${direction === "horizontal" ? "flex-row" : "flex-col"}`} style={{background:background}} ref={scrollerRef}>
         {React.Children.map(children, (child) =>
-          React.cloneElement(child, { style: { flex :"0 0 100vw"} })
+          React.cloneElement(child, {
+            className: clsx(child.props.className,"scroll-section"),
+            style: {
+              ...(direction === "horizontal"
+                ? { flex: "0 0 100vw" }
+                : { flex: "0 0 100vh" }),
+              ...child.props.style,
+            }, 
+          })
         )}
       </div>
     </div>
