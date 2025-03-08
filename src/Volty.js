@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import "./Volty.css";
+gsap.registerPlugin();
 
 export const Cuberto = ({
   size = 10,
@@ -172,104 +173,148 @@ export const ThreeSlider =({images =[ "https://i.pinimg.com/474x/22/28/03/222803
   );
 };
 
-export const Infinite = ({ children, smoothFactor = 0.08, background = "transparent" }) => {
-  const containerRef = useRef(null);
-  const scrollerRef = useRef(null);
-  const [sectionWidth, setSectionWidth] = useState(0);
+export const Wheel = ({ images = ["https://i.pinimg.com/474x/2a/ef/a4/2aefa45cf0ae9f5c15cf5ebeba03ff84.jpg","https://i.pinimg.com/474x/fc/48/44/fc4844de38850753a7465e80a04fc66c.jpg","https://i.pinimg.com/474x/75/d0/fe/75d0fed516c77dca9d5be81cc3276fc2.jpg","https://i.pinimg.com/474x/1a/7d/fa/1a7dfacd5346b48154462ab4d7994507.jpg","https://i.pinimg.com/474x/5c/18/61/5c1861e64398bbfb14a124d498ed92ca.jpg","https://i.pinimg.com/474x/3e/0b/48/3e0b48331ff26098e683196ff8cce389.jpg","https://i.pinimg.com/474x/1b/42/20/1b422058a2835b28a30bf68b0aae298b.jpg","https://i.pinimg.com/474x/24/53/76/24537688a4b7708edf1bb8c39bda8aef.jpg","https://i.pinimg.com/474x/c8/56/92/c85692fe5b52e2abcd4d54bed538fa98.jpg","https://i.pinimg.com/474x/33/7c/05/337c05137c4fc16f403083797183eab5.jpg","https://i.pinimg.com/474x/71/59/fd/7159fd1f7673fb119903c6b09d654b4f.jpg"], width="140px", height="270px" }) => {
+    const wheelRef = useRef(null);
 
-  const BUFFER_SECTIONS = 2;
-  let targetScroll = 0;
-  let currentScroll = 0;
-  let isAnimating = false;
+    useEffect(() => {
+        const wheel = wheelRef.current;
+        const cards = gsap.utils.toArray(".wheel__card");
 
-  const interpolate = (start, end, factor) => start + (end - start) * factor;
+        const setup = () => {
+            const radius = wheel.offsetWidth / 3;
+            const center = wheel.offsetWidth / 2;
+            const total = cards.length;
+            const slice = (2 * Math.PI) / total;
 
-  const setupScrolling = () => {
-    const scroller = scrollerRef.current;
-    const sections = Array.from(scroller.children);
-    scroller.querySelectorAll(".clone").forEach((clone) => clone.remove());
+            cards.forEach((item, i) => {
+                const angle = i * slice;
+                const x = center + radius * Math.sin(angle);
+                const y = center - radius * Math.cos(angle);
 
-    let calculatedWidth = window.innerWidth;
-    setSectionWidth(calculatedWidth);
+                gsap.set(item, {
+                    rotation: `${angle}_rad`,
+                    xPercent: -50,
+                    yPercent: -50,
+                    x,
+                    y
+                });
+            });
+        };
 
-    for (let i = -BUFFER_SECTIONS; i < BUFFER_SECTIONS; i++) {
-      sections.forEach((section) => {
-        const clone = section.cloneNode(true);
-        clone.classList.add("clone");
-        scroller.appendChild(clone);
-      });
+        setup();
+        window.addEventListener("resize", setup);
+
+        let rotation = 0;
+        let isDragging = false;
+        let startX = 0;
+        let velocity = 0;
+        let animationFrame;
+
+        const onMouseDown = (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            cancelAnimationFrame(animationFrame);
+        };
+
+        const onMouseMove = (e) => {
+            if (!isDragging) return;
+            const delta = e.clientX - startX;
+            rotation += delta * 0.3;
+            velocity = delta * 0.5;
+            gsap.to(wheel, { rotate: rotation, duration: 0.3, ease: "power2.out" });
+            startX = e.clientX;
+        };
+
+        const onMouseUp = () => {
+            isDragging = false;
+            smoothInertia();
+        };
+
+        const smoothInertia = () => {
+            if (Math.abs(velocity) > 0.1) {
+                rotation += velocity;
+                gsap.to(wheel, { rotate: rotation, duration: 0.5, ease: "power3.out" });
+                velocity *= 0.95;
+                animationFrame = requestAnimationFrame(smoothInertia);
+            }
+        };
+
+        wheel.addEventListener("mousedown", onMouseDown);
+        window.addEventListener("mousemove", onMouseMove);
+        window.addEventListener("mouseup", onMouseUp);
+
+        return () => {
+            window.removeEventListener("resize", setup);
+            wheel.removeEventListener("mousedown", onMouseDown);
+            window.removeEventListener("mousemove", onMouseMove);
+            window.removeEventListener("mouseup", onMouseUp);
+        };
+    }, []);
+
+    return (
+        <div className="app-container">
+            <section className="section-container">
+                <div ref={wheelRef} className="wheel-container">
+                    {images.map((src, i) => (
+                        <div key={i} className="wheel__card">
+                            <img src={src} alt="img" className="wheel__image" style={{width:width,height:height,objectFit:"cover",userSelect:"none"}} />
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </div>
+    );
+};
+
+
+export const DrawCanvas = ()=> {
+  const canvas = useRef();
+  const prevPosition = useRef(null)
+
+  const init = () => {
+    const ctx = canvas.current.getContext("2d");
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight); 
+  }
+
+  const lerp = (x, y, a) => x * (1 - a) + y * a;
+
+  const handleMouse = (e) => {
+    const { clientX, clientY, movementX, movementY } = e;
+
+    const nbOfCircles = Math.max(Math.abs(movementX), Math.abs(movementY)) / 10;
+
+    if(prevPosition.current != null){
+      const { x, y } = prevPosition.current;
+      const ctx = canvas.current.getContext("2d");
+      ctx.globalCompositeOperation = "destination-out"; // Set before drawing
+      for(let i = 0 ; i < nbOfCircles ; i++){
+        const targetX = lerp(x, clientX, (1 / nbOfCircles) * i);
+        const targetY = lerp(y, clientY, (1 / nbOfCircles) * i);
+        ctx.beginPath();
+        ctx.globalAlpha = 0.7;
+        ctx.fillStyle ="white"; 
+        ctx.arc(targetX, targetY, 50, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+      ctx.globalCompositeOperation = "source-over";
     }
 
-    scroller.style.width = `${calculatedWidth * (sections.length + BUFFER_SECTIONS * 2)}px`;
-    targetScroll = calculatedWidth * sections.length;
-    currentScroll = targetScroll;
-    scroller.style.transform = `translateX(-${currentScroll}px)`;
-
-    return calculatedWidth;
-  };
-
-  const checkBoundary = (calculatedWidth) => {
-    const scroller = scrollerRef.current;
-    if (currentScroll > calculatedWidth * (BUFFER_SECTIONS + 1)) {
-      targetScroll -= calculatedWidth * BUFFER_SECTIONS;
-      currentScroll -= calculatedWidth * BUFFER_SECTIONS;
-      scroller.style.transform = `translateX(-${currentScroll}px)`;
-      return true;
+    prevPosition.current = {
+      x: clientX,
+      y: clientY
     }
-    if (currentScroll < calculatedWidth * BUFFER_SECTIONS) {
-      targetScroll += calculatedWidth * BUFFER_SECTIONS;
-      currentScroll += calculatedWidth * BUFFER_SECTIONS;
-      scroller.style.transform = `translateX(-${currentScroll}px)`;
-      return true;
-    }
-    return false;
-  };
-
-  const animateScroll = (calculatedWidth) => {
-    const scroller = scrollerRef.current;
-    currentScroll = interpolate(currentScroll, targetScroll, smoothFactor);
-    scroller.style.transform = `translateX(-${currentScroll}px)`;
-
-    if (Math.abs(targetScroll - currentScroll) < 0.1) {
-      isAnimating = false;
-    } else {
-      requestAnimationFrame(() => animateScroll(calculatedWidth));
-    }
-  };
-
-  const handleWheelScroll = (e) => {
-    e.preventDefault();
-    targetScroll += e.deltaY * 0.5;
-    checkBoundary(sectionWidth);
-
-    if (!isAnimating) {
-      isAnimating = true;
-      requestAnimationFrame(() => animateScroll(sectionWidth));
-    }
-  };
+  }
 
   useEffect(() => {
-    const container = containerRef.current;
-
-    if (container) {
-      const calculatedWidth = setupScrolling();
-      container.addEventListener("wheel", handleWheelScroll, { passive: false });
-
-      return () => {
-        container.removeEventListener("wheel", handleWheelScroll);
-      };
-    }
+    init();
   }, []);
 
   return (
-    <div className="scroll-container" style={{background:background}} ref={containerRef}>
-      <div className="scroll-wrapper" style={{background:background}} ref={scrollerRef}>
-        {React.Children.map(children, (child) =>
-          React.cloneElement(child, {
-            className: `${child.props.className || ""} scroll-section`.trim(),
-          })
-        )}
-      </div>
+    <div style={{position:"relative",width:"100vw",height:"100vh"}}>
+      <canvas ref={canvas} onMouseMove={handleMouse} height={window.innerHeight} width={window.innerWidth}/>
     </div>
   );
 };
+
+
