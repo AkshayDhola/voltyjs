@@ -197,8 +197,8 @@ function App() {
         <p className="self-end">with cool sparks</p>
         <p>Npm Package</p>
         <p className="self-end">Discover the features</p>
-        <DrawCanvas />
       </div>
+      <DrawCanvas />
    </div>
   );
 }
