@@ -97,7 +97,7 @@ import { TextBentoo } from 'voltyjs';
 function App() {
   return (
     <div className="w-full h-screen">
-         <TextBentoo color={"#B9B28A"} text={"sitaram"} min={50} max={300} bottom={20} left={20} />
+         <TextBentoo color={"#B9B28A"} text={"sitaram"} min={50} max={300}/>
     </div>
   );
 }
@@ -191,8 +191,8 @@ import { DrawCanvas } from 'voltyjs';
 
 function App() {
   return (
-    <div className="flex w-full h-screen items-center justify-center overflow-hidden relative">
-      <div className="absolute w-4/5 flex flex-col text-6xl uppercase items-start">
+    <div className="flex flex-col w-full h-screen items-center justify-center">
+      <div className="absolute w-4/5 leading-tight flex flex-col text-6xl uppercase items-start">
         <p>Experience Volty</p>
         <p className="self-end">with cool sparks</p>
         <p>Npm Package</p>
