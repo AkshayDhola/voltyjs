@@ -14,7 +14,8 @@ Volty is an innovative React animation library designed to enhance user interfac
    - Text Effect
    - Image Trail Effect
    - 3D Slider Effect
-   - Infinite Scrolling Effect
+   - Wheel Scrolling Effect
+   - Draw Canvas Effect
 
 ## Introduction
 
@@ -158,22 +159,46 @@ export default App;
 ![images](media/three.png)
 
 
-### Infinite Scrolling
+### Wheel Scrolling Effect
 
-The feature creates smooth Infinite scrolling effect, creating an engaging user experience.
+The feature creates smooth wheel scrolling effect, creating an engaging user experience.
 
 ```javascript
 import React from 'react';
-import { Infinite } from 'voltyjs';
+import { Wheel } from 'voltyjs';
 
 function App() {
   return (
-    <Infinite smoothFactor={0.08}>
-      <div style={{width:"100vw",height:"100vh",background:"#A4B465"}}></div>
-      <div style={{width:"100vw",height:"100vh",background:"#E5D0AC"}}></div>
-      <div style={{width:"100vw",height:"100vh",background:"#FFDA78"}}></div>
-      <div style={{width:"100vw",height:"100vh",background:"#CDC1FF"}}></div>
-   </Infinite>
+    <div className="w-full h-screen overflow-hidden relative">
+      <Wheel width={"140px"} height={"270px"} />
+    </div>
+  );
+}
+
+export default App;
+```
+
+1. For `images` pass the array of images which you want to show.
+
+### Draw Canvas Effect
+
+The feature creates canvas effect, creating an engaging user experience.
+
+```javascript
+import React from 'react';
+import { DrawCanvas } from 'voltyjs';
+
+function App() {
+  return (
+    <div className="flex w-full h-screen items-center justify-center overflow-hidden relative">
+      <div className="absolute w-4/5 flex flex-col text-6xl uppercase items-start">
+        <p>Experience Volty</p>
+        <p className="self-end">with cool sparks</p>
+        <p>Npm Package</p>
+        <p className="self-end">Discover the features</p>
+        <DrawCanvas />
+      </div>
+   </div>
   );
 }
 
