@@ -144,7 +144,8 @@ import { ThreeSlider } from 'voltyjs';
 
 function App() {
   return (
-    <div className="w-full h-[300vh] overflow-hidden">  {/* give proper height, how much you want to scoll? */}
+    {/* give proper height, how much you want to scoll? */}
+    <div className="w-full h-[300vh] overflow-hidden">  
          <ThreeSlider size={200}/>
     </div>
   );
