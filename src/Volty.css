@@ -49,18 +49,20 @@
   transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.scroll-container {
-  width: 100vw;
-  overflow: hidden;
-  position: relative;
-}
-
-.scroll-wrapper {
+.wheel-container {
+  position: absolute;
   display: flex;
-  white-space: nowrap;
-  will-change: transform;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
 }
 
-.clone {
-  flex: 0 0 100vw;
+.wheel__card {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
