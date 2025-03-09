@@ -15,9 +15,13 @@ Volty is an innovative React animation library designed to enhance user interfac
    - Image Trail Effect
    - 3D Slider Effect
    - Wheel Scrolling Effect
+5. [Canvas Effects](#canvas-effects)
    - Draw Canvas Effect
+6. [3D Effects with React](#3d-effects-with-react)
    - 3D Box Geometry with R3F
-
+   - 3D Glass Effect with R3F TorusGeometry
+7. [License](#license)
+8. [Note](#note)
 ## Introduction
 
 Voltyjs is a quick and efficient way to enhance the user experience with minimal effort.
@@ -63,7 +67,7 @@ npm install gsap
 
 ## Cool Effects
 
-These are effects are implemented with the help of Gsap and Css to offer a unique experience with single function.
+These are effects are implemented with the help of GSAP and CSS to offer a unique experience with single function.
 
 ### Cuberto
 
@@ -182,6 +186,11 @@ export default App;
 
 1. For `images` pass the array of images which you want to show.
 
+
+## Canvas Effects
+
+These are effects are implemented with the help of GSAP and CANVAS to offer a unique experience with single function.
+
 ### Draw Canvas Effect
 
 The feature creates canvas effect, creating an engaging user experience.
@@ -207,6 +216,11 @@ function App() {
 export default App;
 ```
 
+
+## 3D Effects with React
+
+These are effects are implemented with the help of react-three/fiber, react-three/drei and three.js  to offer a unique experience with single function.
+
 ### 3D Box Geometry with R3F
 
 The feature creates 3D Box Geometry Effect with React Three Fiber, creating an engaging user experience.
@@ -219,6 +233,27 @@ function App() {
   return (
     <div className="w-full h-screen bg-slate-300 relative overflow-hidden">
       <BoxThreeD boxColor="white" />
+   </div>
+  );
+}
+
+export default App;
+```
+
+1. For `show` pass the array of images with fixed length 6 which you want to show.
+
+### 3D Glass Effect with R3F TorusGeometry
+
+The feature creates 3D Box Geometry Effect with React Three Fiber, creating an engaging user experience.
+
+```javascript
+import React from 'react';
+import { GlassEffect } from 'voltyjs';
+
+function App() {
+  return (
+    <div className="w-full h-screen bg-slate-300 relative overflow-hidden">
+      <GlassEffect text="hello voltyjs" size={1.4} />
    </div>
   );
 }
