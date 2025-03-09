@@ -368,3 +368,37 @@ export const BoxThreeD=({ show = [], boxColor="orange" })=>{
     </Canvas>
   )
 };
+
+
+
+
+function GlassHandle({text,size}) {
+  const meshRef = useRef(null)
+  const { viewport } = useThree();
+  useFrame((state,delta)=>{
+    meshRef.current.rotation.x+=delta *0.3;
+    meshRef.current.rotation.y+=delta* 0.3;
+  })
+
+  return (
+    <group scale={viewport.width/11}>
+      <Text fontSize={size} position={[0,0,0]}>
+        {text}
+      </Text>
+      <mesh ref={meshRef}>
+        <torusGeometry args={[1, 0.4, 16, 60]} />
+        <MeshTransmissionMaterial thickness={0.2} roughness={.2} transmission={1} ior={1} chromaticAberration={.5} backside={true}/>
+      </mesh>
+    </group>
+  )
+}
+
+export const GlassEffect=({text="sitaram",size=1.3})=>{  
+  return (
+    <Canvas style={{ height: '100vh', width: '100%', background: "black" }} camera={{fov: 55 }}>
+      <directionalLight intensity={3} position={[0, 0,0]} />
+      <Environment preset='city'/>
+      <GlassHandle text={text} size={size} />
+    </Canvas>
+  )
+}
