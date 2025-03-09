@@ -16,6 +16,7 @@ Volty is an innovative React animation library designed to enhance user interfac
    - 3D Slider Effect
    - Wheel Scrolling Effect
    - Draw Canvas Effect
+   - 3D Box Geometry with R3F
 
 ## Introduction
 
@@ -205,6 +206,27 @@ function App() {
 
 export default App;
 ```
+
+### 3D Box Geometry with R3F
+
+The feature creates 3D Box Geometry Effect with React Three Fiber, creating an engaging user experience.
+
+```javascript
+import React from 'react';
+import { BoxThreeD } from 'voltyjs';
+
+function App() {
+  return (
+    <div className="w-full h-screen bg-slate-300 relative overflow-hidden">
+      <BoxThreeD boxColor="white" />
+   </div>
+  );
+}
+
+export default App;
+```
+
+1. For `show` pass the array of images with fixed length 6 which you want to show.
 
 # License
 
