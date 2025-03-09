@@ -370,8 +370,6 @@ export const BoxThreeD=({ show = [], boxColor="orange" })=>{
 };
 
 
-
-
 function GlassHandle({text,size}) {
   const meshRef = useRef(null)
   const { viewport } = useThree();
