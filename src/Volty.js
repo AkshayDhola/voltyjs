@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
+import { OrbitControls, Environment, MeshTransmissionMaterial, Text } from '@react-three/drei'
 import { TextureLoader } from 'three'
 import "./Volty.css";
 gsap.registerPlugin();
