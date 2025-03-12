@@ -20,8 +20,11 @@ Volty is an innovative React animation library designed to enhance user interfac
 6. [3D Effects with React](#3d-effects-with-react)
    - 3D Box Geometry with R3F
    - 3D Glass Effect with R3F TorusGeometry
-7. [Page Trasitions]()
-   -
+7. [Page Trasitions](#page-trasitions)
+   - style 1 . Grid Effect
+   - style 2 . DownFall Effect
+   - style 3 . Carve Effect
+   - style 4 . Mirror Grid Effect
 8. [License](#license)
 9. [Note](#note)
 
@@ -265,6 +268,34 @@ export default App;
 ```
 
 1. For `show` pass the array of images with fixed length 6 which you want to show.
+
+### Page Trasitions
+
+The feature creates smooth page trasitions effect, creating an engaging user experience.
+
+```javascript
+import React from 'react';
+import { PageTransition } from 'voltyjs';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+// import your components
+
+function App() {
+  return (
+    <Router>
+      {/* write your link like <Link to="/">Volty</Link> */}
+      <PageTransition transitionStyle={3} color="black">
+        <Routes>
+          { /* <Route path="/" element={ <Home /> } /> */}
+        </Routes>
+      </PageTransition>
+    </Router>
+  );
+}
+
+export default App;
+```
+
+1. `gridLength` is just related style 1 page transition.
 
 # License
 
