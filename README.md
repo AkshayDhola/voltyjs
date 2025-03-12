@@ -20,8 +20,11 @@ Volty is an innovative React animation library designed to enhance user interfac
 6. [3D Effects with React](#3d-effects-with-react)
    - 3D Box Geometry with R3F
    - 3D Glass Effect with R3F TorusGeometry
-7. [License](#license)
-8. [Note](#note)
+7. [Page Trasitions]()
+   -
+8. [License](#license)
+9. [Note](#note)
+
 ## Introduction
 
 Voltyjs is a quick and efficient way to enhance the user experience with minimal effort.
