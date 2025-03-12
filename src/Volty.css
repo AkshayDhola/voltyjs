@@ -80,3 +80,40 @@
   top: 0;
   left: 0;
 }
+
+.loader-container,
+.transition-container {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.loader-container {
+  display: flex;
+}
+
+.loader-container div {
+  height: 100%;
+}
+
+.loader-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+.transition-container {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+}
+
+.transition-container div {
+  flex: 1;
+  display: flex;
+}
+
+.transition-container div div {
+  flex: 1;
+  will-change: transform;
+}
